@@ -1,0 +1,11 @@
+# Netlify config — deploy with Base directory set to "frontend"
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# SPA fallback: deep links like /reset-password and /result/:id must serve
+# index.html so react-router can handle them (otherwise refresh = 404)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

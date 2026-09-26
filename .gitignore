@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies (root and nested, e.g. docs/sample-data/node_modules)
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+*.local
+
+# Environment files: keep secrets out, keep the template in
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Zip archives in docs duplicate the markdown folders next to them
+docs/**/*.zip
+
+# Office lock files
+~$*
+
+sample-data
+
+sample-data/*

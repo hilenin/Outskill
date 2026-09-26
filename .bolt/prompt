@@ -1,0 +1,102 @@
+Build a beautiful, responsive web app called "RoomReimagine" — an AI
+interior makeover portal where users upload a photo of their room, pick a
+design style, and see an AI-restyled version of their own room. Use React
++ Vite + Tailwind CSS. For now use MOCK data and placeholder images
+(https://picsum.photos seeds are fine) — no backend wiring yet; structure
+data access behind a small mock service layer so Supabase can replace it
+later without touching components.
+
+DESIGN SYSTEM (apply consistently everywhere):
+- Mood: warm, calm, editorial — like a premium interior design magazine,
+  not a SaaS dashboard.
+- Colors: background warm off-white #FAF7F2; surfaces white; ink
+  #2B2622 for headings, #6B6259 for body; accent terracotta #C4704B for
+  primary actions and active states; secondary sage #8A9B8E for badges
+  and success; error #B3564D. No pure black, no cold grays, no blue.
+- Typography: elegant serif for display headings (e.g. "Fraunces" or
+  "Playfair Display" from Google Fonts), clean sans for UI and body
+  (e.g. "Inter"). Generous line-height, large airy headings.
+- Shape: rounded-2xl cards, soft warm shadows (shadow color derived from
+  the ink tone at low opacity), 1px warm borders #EDE6DC where needed.
+- Spacing: roomy — min 24px card padding, clear vertical rhythm.
+- Imagery is the hero: room photos always displayed large with rounded
+  corners; UI chrome stays quiet around them.
+- Motion: subtle — 150-250ms ease transitions on hover/press, gentle
+  fade/slide on screen enter. Nothing bouncy.
+- Mobile-first: every screen must look intentional at 375px; nav
+  collapses to a thumb-friendly bottom bar on small screens.
+
+APP SHELL:
+Header with a serif "RoomReimagine" wordmark, nav links "New Makeover"
+and "Gallery" with a terracotta active underline, and an avatar menu with
+Sign out. Bottom tab bar on mobile (New Makeover / Gallery).
+
+SCREENS & ROUTES (build all, with mock state toggles I can preview):
+
+1. /signin — Auth page. Split layout on desktop: left panel is a
+   full-bleed hero collage of a room before/after with the tagline
+   "See your room, reimagined." over a soft gradient; right panel holds
+   the card with Sign In / Sign Up tabs, email + password fields with
+   inline validation, a terracotta primary button with loading state,
+   and friendly error messages. Mobile: hero shrinks to a compact
+   banner above the card.
+
+2. /new-makeover — The creation flow, one column, three steps visually
+   numbered:
+   Step 1 "Your room": large drag-and-drop upload zone (dashed warm
+   border, camera icon, "Drop a photo or tap to choose"), with a
+   preview state showing the chosen photo, a "Change photo" text
+   button, and the tip "Use a well-lit, wide-angle photo for best
+   results."
+   Step 2 "Pick a style": a grid of 8 selectable style cards (2 cols
+   mobile, 4 desktop), each with a thumbnail, name, and one-liner:
+   Scandinavian, Modern Minimalist, Industrial, Bohemian, Japandi,
+   Mid-Century Modern, Coastal, Rustic. Selected card gets a
+   terracotta border + check chip.
+   Step 3 "Make it yours (optional)": a notes input, max 200 chars
+   with counter, placeholder "e.g., keep the sofa, add plants, warm
+   lighting."
+   Sticky footer bar with a large "Generate Makeover" primary button,
+   disabled with helper text until photo + style are set.
+
+3. /result/:id — The reveal. Two mock states I can toggle:
+   LOADING: the uploaded room photo dimmed with a slow shimmer sweep
+   and rotating status lines ("Analyzing your room…", "Applying Japandi
+   style…", "Rendering your makeover…") and the style badge.
+   COMPLETE: a large before/after compare slider (draggable divider
+   with a round handle, "Before"/"After" labels, style badge top-left),
+   a Before/After toggle button beneath, the notes as a caption, and an
+   action bar: "Save to Gallery" (primary), "Try Another Style"
+   (secondary). Also design a FAILED state: warm, encouraging message
+   "That one didn't work — let's try again" with a Retry button.
+
+4. /gallery — Personal gallery. Masonry-ish responsive card grid
+   (2 cols mobile / 3-4 desktop) of saved concepts: concept image,
+   style badge, date, and a "{n} styles" sage chip when a room has
+   multiple concepts. Include a designed EMPTY state: soft
+   illustration or large emoji, "No makeovers yet", and a primary
+   "Create your first makeover" button.
+
+5. /concept/:id — Concept detail. The same compare slider component as
+   /result reused at full width, style badge + notes + date, a "Style
+   Shootout" section shown when the room has 2+ concepts (original
+   photo card labeled "Original", then concept cards each with style
+   badge, the current one outlined "Viewing", ending with a
+   "+ Try Another Style" tile), and a quiet danger-styled Delete button
+   with a confirmation dialog.
+
+SHARED COMPONENTS (create once, reuse everywhere): PrimaryButton,
+SecondaryButton (both with loading/disabled), Toast (success/error,
+auto-dismiss), Spinner, CompareSlider, StyleBadge, EmptyState.
+
+Include a hidden /dev route with links to every screen in every mock
+state (loading/complete/failed/empty) so the design can be reviewed
+end-to-end without a backend.
+
+For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+
+By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
+
+Use icons from lucide-react for logos.
+
+Import project modules with the `@/` path alias, which maps to `src/` (e.g. `@/components/Foo` == `src/components/Foo`), instead of deep relative paths like `../../components/Foo`.
